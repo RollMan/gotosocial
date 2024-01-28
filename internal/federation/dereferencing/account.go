@@ -623,7 +623,11 @@ func (d *Dereferencer) enrichAccount(
 	}
 
 	if latestAcc.Domain == "" {
+<<<<<<< HEAD
 		// Ensure we have a domain set by this point,
+=======
+		// ensure we have a domain set by this point,
+>>>>>>> hevc_support
 		// otherwise it gets stored as a local user!
 		//
 		// TODO: there is probably a more granular way
@@ -632,6 +636,7 @@ func (d *Dereferencer) enrichAccount(
 		return nil, nil, gtserror.Newf("empty domain for %s", uri)
 	}
 
+<<<<<<< HEAD
 	/*
 		BY THIS POINT we have more or less a fullly-formed
 		representation of the target account, derived from
@@ -642,6 +647,9 @@ func (d *Dereferencer) enrichAccount(
 
 	// Ensure internal db ID is
 	// set and update fetch time.
+=======
+	// Ensure ID is set and update fetch time.
+>>>>>>> hevc_support
 	latestAcc.ID = account.ID
 	latestAcc.FetchedAt = time.Now()
 

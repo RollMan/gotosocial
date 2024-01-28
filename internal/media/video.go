@@ -71,6 +71,16 @@ func decodeVideoFrame(r io.Reader) (*gtsVideo, error) {
 				audioBitrate = br
 			}
 
+            if 640 > width {
+                width = 640
+            }
+            if 480 > height {
+                height = 480
+            }
+            if video.framerate == 0 {
+                video.framerate = 60
+            }
+
 			if d := float64(tr.Duration) / float64(tr.Timescale); d > float64(video.duration) {
 				video.duration = float32(d)
 			}
@@ -80,11 +90,15 @@ func decodeVideoFrame(r io.Reader) (*gtsVideo, error) {
 		// video track
 		if w := int(tr.AVC.Width); w > width {
 			width = w
-		}
+		}else{
+            width = 640
+        }
 
 		if h := int(tr.AVC.Height); h > height {
 			height = h
-		}
+		}else{
+            height = 480
+        }
 
 		if br := tr.Samples.GetBitrate(tr.Timescale); br > videoBitrate {
 			videoBitrate = br
@@ -95,7 +109,10 @@ func decodeVideoFrame(r io.Reader) (*gtsVideo, error) {
 		if d := float64(tr.Duration) / float64(tr.Timescale); d > float64(video.duration) {
 			video.framerate = float32(len(tr.Samples)) / float32(d)
 			video.duration = float32(d)
-		}
+		}else {
+            video.framerate = 60
+            video.duration = float32(tr.Duration)
+        }
 	}
 
 	// overall bitrate should be audio + video combined

@@ -43,7 +43,7 @@ var testDefaults = config.Configuration{
 	Host:               "localhost:8080",
 	AccountDomain:      "localhost:8080",
 	Protocol:           "http",
-	BindAddress:        "127.0.0.1",
+	BindAddress:        "0.0.0.0",
 	Port:               8080,
 	TrustedProxies:     []string{"127.0.0.1/32", "::1"},
 
